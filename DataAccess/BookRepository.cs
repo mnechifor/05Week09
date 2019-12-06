@@ -29,15 +29,13 @@ namespace DataAccess
                 {
                     var currentRow = dataReader;
 
-                    Book book = new Book
-                    {
-                        BookId = (int) currentRow["BookId"],
-                        Title = currentRow["Title"].ToString(),
-                        PublisherId = (int) currentRow["PublisherId"],
-                        Year = (int) currentRow["Year"],
-                        Price = (decimal) currentRow["Price"]
-                    };
+                    Book book = new Book();
 
+                    book.BookId = (int)currentRow["BookId"];
+                    book.Title = currentRow["Title"].ToString();
+                    book.PublisherId = currentRow["PublisherId"] as int? ?? 0;
+                    book.Year = currentRow["Year"] as int? ?? default(int);
+                    book.Price = currentRow["Price"] as decimal? ?? default(decimal);
 
                     books.Add(book);
                 }
